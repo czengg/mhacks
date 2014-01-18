@@ -9,6 +9,7 @@
 		{% load staticfiles %}
 		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
 		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
+		<script src="{% static 'application.js' %}" type="text/javascript"></script>
 	</head>
 	<!-- header with logo and 'create profile' -->
 <header>
@@ -37,7 +38,7 @@
 			{{ form.role }}
 			
 			<!-- Continue button -->
-			<div id="signupButton">Continue</div>
+			<div id="signupButton" onclick="javascript:this.parentNode.submit();">Continue</div>
 		</form>
 		
 		

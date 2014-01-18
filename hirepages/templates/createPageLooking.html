@@ -35,9 +35,8 @@
 			<!-- Education Info -->
 			<div id="educationInfo">
 			<h3>Education:</h3>
-			<div class="educationSection">
-			<input type="text" placeholder="School"/>
-			<input type="text" placeholder="Degree"/>
+			{{ form.school| attr:"placeholder:School" }}
+
 			</div>
 			</div>
 			<img class="addIcon">
@@ -63,6 +62,7 @@
 			<img class="addIcon">
 			
 			<h3>Skills:</h3>
+			{{ form.skills| attr:"placeholder:Enter your skills separated by commas"}}
 			<input type="text" placeholder=""/>
 	
 			
