@@ -6,16 +6,19 @@
 		<title>Hirepages</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
-		<link href="css/styles.css" type="text/css" rel="stylesheet">
+		{% load staticfiles %}
+		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
+		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
 	</head>
 
 	<body id="loginBody">
+		{% load widget_tweaks %}
 		<form action="/login/" method="post">
 			<!-- email/password -->
-			<input type="text" name="email" placeholder="Enter your email">
-			<input type="password" name="pwd" placeholder="Enter your password" >
+			{{ form.email| attr:"placeholder:Enter your email" }}
+			{{ form.password| attr:"placeholder:Enter your password" }}
 			<!-- login button -->
-			<input type="submit">Login</input>
+			<div id="loginButton">Login</div>
 		</form>
 
 	</body>

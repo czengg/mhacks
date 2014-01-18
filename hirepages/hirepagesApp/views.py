@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 
 from hirepagesApp.models import User, Looker
-from hirepagesApp.forms import SignupForm
+from hirepagesApp.forms import *
 
 #################################################
 ############## SIGNUP, LOGIN ####################

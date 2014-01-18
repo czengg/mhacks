@@ -6,27 +6,30 @@
 		<title>Hirepages</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
-		<link href="css/styles.css" type="text/css" rel="stylesheet">
+		{% load staticfiles %}
+		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
+		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
 	</head>
 	<!-- header with logo and 'create profile' -->
 <header>
-	<h2><div class="inline strongV">Hire</div><div class="inline lightV">pages</div></h2>
+	<h2><div class="inline logo1">Hire</div><div class="inline logo2">pages</div></h2>
 	<p>Create Profile</p>
 	
 </header>
 	<body id="signupBody">
+		{% load widget_tweaks %}
 		<form action="/signup/" method="post">
 			<!-- email/password -->
-			{{ form.email }}
-			{{ form.password }}
+			{{ form.email| attr:"placeholder:Enter your email" }}
+			{{ form.password| attr:"placeholder:Enter your password" }}
 			
 			<!-- name -->
-			{{ form.firstName }}
-		    {{ form.middleName }}
-		    {{ form.lastName}}
+			{{ form.firstName| attr:"placeholder:First Name" }}
+		    {{ form.middleName| attr:"placeholder:Middle Name" }}
+		    {{ form.lastName| attr:"placeholder:Last Name" }}
 			
 			<!-- birthday -->
-			{{ form.dateOfBirth}}
+			{{ form.dateOfBirth }}
 
 <!-- checkboxes to select if recruiting or looking -->
 			<p>Are you recruiting or looking to be hired?</p>
@@ -34,7 +37,7 @@
 			{{ form.role }}
 			
 			<!-- Continue button -->
-			<input type="submit">Continue</input>
+			<div id="signupButton">Continue</div>
 		</form>
 		
 		
