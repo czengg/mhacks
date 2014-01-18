@@ -27,7 +27,7 @@ class Experience(models.Model):
 
 class User(models.Model):
     email = models.EmailField()
-    password = models.CharField(max_length=20, min_length=5)
+    password = models.CharField(max_length=20)
     firstName = models.CharField(max_length=30)
     middleName = models.CharField(max_length=30, 
                                     blank=True)

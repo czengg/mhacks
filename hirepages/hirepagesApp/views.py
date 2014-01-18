@@ -4,6 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 
 from hirepagesApp.models import User, Looker
+from hirepagesApp.forms import SignupForm
 
 #################################################
 ############## SIGNUP, LOGIN ####################
@@ -24,14 +25,14 @@ def signup(request):
                     cellNumber=cd['cellNumber'],
                     role=cd['role'],)
             user.save()
-            return render(request, 'login_page.html', Context())
+            return render(request, 'login.html', Context())
     else:
         form = SignupForm()
-        return render(request, 'signup_page.html', {'form': form})
+        return render(request, 'signup.html', {'form': form})
 
     
 def login(request):
-    return render(request, 'login_page.html', Context())
+    return render(request, 'login.html', Context())
 
     
 
