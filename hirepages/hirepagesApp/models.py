@@ -26,17 +26,17 @@ class Experience(models.Model):
 
 
 class User(models.Model):
-    recruiterProfile = models.OneToOneField(Recruiter)
-    lookerProfile = models.OneToOneField(Looker)
+    recruiterProfile = models.OneToOneField('Recruiter')
+    lookerProfile = models.OneToOneField('Looker')
 
     email = models.EmailField()
     firstName = models.CharField(max_length=30)
     middleName = models.CharField(max_length=30, 
-                                    required=False)
+                                    blank=True)
     lastName = models.CharField(max_length=30)
     dateOfBirth = models.DateField()
     workNumber = models.CharField(max_length=12)
-    cellNumber = 
+    cellNumber = models.CharField(max_length=12)
     RECRUITING = 0
     LOOKING = 1
     ROLE_IN_SYSTEM = (
@@ -51,7 +51,6 @@ class Recruiter(models.Model):
 
 class Company(models.Model):
     description = models.TextField(max_length=200)
-    picture = models.ImageField()
     linkToWebsite = models.URLField()
 
 class Position(models.Model):
