@@ -7,7 +7,7 @@ class SignupForm(forms.Form):
     firstName = forms.CharField(max_length=30)
     middleName = forms.CharField(max_length=30)
     lastName = forms.CharField(max_length=30)
-    dateOfBirth = forms.DateField(widget=extras.SelectDateWidget)
+    dateOfBirth = forms.DateField(widget=extras.SelectDateWidget(years=range(1999,1939,-1)))
     workNumber = forms.CharField(max_length=12)
     cellNumber = forms.CharField(max_length=12)
 
