@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Hirepages</title>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
+		<link href="css/styles.css" type="text/css" rel="stylesheet">
+
+		<script type="text/javascript" src="../templates/auth.js"></script>
+        <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+            api_key: 77ff77sr59nis6
+            onLoad: doneLogin
+            authorize: true
+        </script>
+	</head>
+	<!-- header with logo and 'create profile' -->
+<header>
+	<h2><div class="inline strongV">Hire</div><div class="inline lightV">pages</div></h2>
+	<p>Create Page - Looking</p>
+	
+</header>
+	<body id="createPageLookingBody">
+		<form action="/createlook/" method="post">
+			<!-- editing icons only visible once profile is created and user goes to edit-->
+			<img class="editIcon">
+			<img class="deleteIcon">
+			<img class="saveIcon">
+			
+			<!-- *****put linkedin button here****** -->
+			<script type="in/Login"></script>
+			
+			<!-- Education Info -->
+			<div id="educationInfo">
+			<h3>Education:</h3>
+			<div class="educationSection">
+			<input type="text" placeholder="School"/>
+			<input type="text" placeholder="Degree"/>
+			</div>
+			</div>
+			<img class="addIcon">
+			
+			
+			<!-- Experience Info -->
+			<div id="experienceInfo">
+			<h3>Experience:</h3>
+			<p>(jobs, projects, etc.)</p>
+			<div class="experienceSection">
+			<input type="text" placeholder="Position"/>
+			<input type="text" placeholder="Company"/>
+			
+			
+			<!-- *****date pickers for start and end dates****** -->
+			
+			
+			
+			<input type="text" placeholder="Tags"/>
+			<textarea>Description</textarea>
+			</div>
+			</div>
+			<img class="addIcon">
+			
+			<h3>Skills:</h3>
+			<input type="text" placeholder=""/>
+	
+			
+			
+			
+			<!-- submit button -->
+			<div href="#">Submit</div>
+		</form>
+		
+		
+		
+
+	</body>
+</html>

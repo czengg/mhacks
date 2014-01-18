@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>Hirepages</title>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
+		<link href="css/styles.css" type="text/css" rel="stylesheet">
+	</head>
+	<!-- header with logo and 'create profile' -->
+<header>
+	<h2><div class="inline strongV">Hire</div><div class="inline lightV">pages</div></h2>
+	<p>Create Page</p>
+	
+</header>
+	<body id="createPageRecruitingBody">
+		<form action="/createrecruit/" method="post">
+			<!-- editing icons only visible once profile is created and user goes to edit-->
+			<img class="editIcon">
+			<img class="deleteIcon">
+			<img class="saveIcon">
+			
+			<!-- Company Info -->
+			<div id="company info">
+			<input type="text" placeholder="Company Name"/>
+			
+			<!-- checkbox to autopopulate company info -->
+			<label><input type="checkbox" name="Check company information">Check for existing company information</label>
+			<a><input type="url" name="Company website">Company Website</a>
+			<textarea>Company Description</textarea>
+			</div>
+			
+			<div class="positionSeeking">
+			<input type="text" placeholder="Position Seeking"/>
+			
+			<input type="text" placeholder="Tags"/>
+			
+			<textarea>Position Description</textarea>
+			</div>
+			<img class="addIcon">
+	
+			
+			
+			
+			<!-- submit button -->
+			<input type="submit">Submit</input>
+		</form>
+		
+		
+		
+
+	</body>
+</html>
