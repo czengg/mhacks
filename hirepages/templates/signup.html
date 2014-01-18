@@ -19,7 +19,7 @@
 </header>
 	<body id="signupBody">
 		{% load widget_tweaks %}
-		<form action="/signup/" method="post">
+		<form action="/signup" method="post">
 			<!-- email/password -->
 			{{ form.email| attr:"placeholder:Enter your email" }}
 			{{ form.password| attr:"placeholder:Enter your password" }}
@@ -32,6 +32,9 @@
 			<!-- birthday -->
 			{{ form.dateOfBirth }}
 
+            <!-- phone number -->
+            {{ form.workNumber| attr:"placeholder:Work number"}}
+            {{ form.cellNumber| attr:"placeholder:Cell number"}}
 <!-- checkboxes to select if recruiting or looking -->
 			<p>Are you recruiting or looking to be hired?</p>
 			

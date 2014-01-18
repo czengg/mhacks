@@ -14,21 +14,31 @@ class SignupForm(forms.Form):
     RECRUITING = 0
     LOOKING = 1
     ROLE_IN_SYSTEM = ( (LOOKING, 'Looking'), (RECRUITING, 'Recruiting'),)
-    role = forms.MultipleChoiceField(widget=forms.RadioSelect,
+    role = forms.ChoiceField(widget=forms.RadioSelect,
                                         choices=ROLE_IN_SYSTEM)
 
 class LoginForm(forms.Form):
     email = forms.CharField(max_length=30)
     password=forms.CharField(max_length=20)
 
-class LookingForm(forms.Form):
+class LookerForm(forms.Form):
     school = forms.CharField(max_length=50)
 
     INTERNSHIP = 0
     FULLTIME = 1
     JOBTYPECHOICES = ((INTERNSHIP, 'Internship'), (FULLTIME, 'FullTime'),)
-    jobType = forms.MultipleChoiceField(widget=forms.RadioSelect,
+    jobType = forms.ChoiceField(widget=forms.RadioSelect,
                                             choices=JOBTYPECHOICES)
     active = forms.BooleanField()
     skills = forms.CharField(max_length=100)
+
+
+class ExperienceForm(forms.Form):
+    startDate = forms.DateField()
+    endDate = forms.DateField()
+    position = forms.CharField(max_length=50)
+    company = forms.CharField(max_length=50)
+    description = forms.CharField(widget=forms.Textarea, max_length=200)
+    tags = forms.CharField(max_length=100, widget=forms.Textarea)
+
 

@@ -11,12 +11,15 @@ from hirepagesApp.forms import *
 #################################################
 
 def signup(request):
+    print "in signup"
     if request.method == 'POST':
+        print "post method"
         form = SignupForm(request.POST)
         if form.is_valid():
+            print "valid form"
             cd = form.cleaned_data
             user = User(email=cd['email'],
-                    password=cd['pwd'],
+                    password=cd['password'],
                     firstName=cd['firstName'],
                     middleName=cd['middleName'],
                     lastName=cd['lastName'],
@@ -27,7 +30,12 @@ def signup(request):
             user.save()
             request.session["user"] = cd['email']
             return render(request, 'login.html', Context())
+        else:
+            print "invalid form"
+            print form.errors
+            return render(request, 'signup.html', {'form': form})
     else:
+        print "get method"
         form = SignupForm()
         return render(request, 'signup.html', {'form': form})
 
@@ -38,7 +46,7 @@ def login(request):
         if form.is_valid():
             cd = form.cleaned_data
             email = cd['email']
-            pwd = cd['pwd']
+            pwd = cd['password']
             try:
                 user = User.objects.get(email=email)
                 if (pwd != user.password):
@@ -56,8 +64,10 @@ def login(request):
 
 
 def logout(request):
-    del request.session["user"]
-    return render(reuqest, "login.html", Context())
+    if "user" in request.session: 
+        del request.session["user"]
+    form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
     
 
@@ -90,11 +100,11 @@ def create_looking_page(request):
                 tag = Tag(tag=skill)
                 tag.save()
                 looker.tags.add(tag)
-        return render(request, 'view_looking_page.html', Context())
+        return render(request, 'createPageLooking.html', Context())
  
     else:
         form = LookerForm()
-        return render(request, 'edit_looking_page.html', {'form':form})
+        return render(request, 'createPageLooking.html', {'form':form})
 
 
 def read_looking_page(request):
