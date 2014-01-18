@@ -1,15 +1,27 @@
 from django import forms
 from django.forms import extras
+from hirepagesApp.models import User, Looker
+from django.core.exceptions import ValidationError
+
+def validate_username_unique(value):
+    '''Custom validator for user uniqueness.'''
+    if User.objects.filter(email=value).exists():
+        raise ValidationError(u'Sorry, %s already has an account!' % value)
 
 class SignupForm(forms.Form):
-    email = forms.CharField(max_length=30)    
-    password = forms.CharField(max_length=20)
+    email = forms.CharField(max_length=30,
+                                validators=[validate_username_unique])    
+    password = forms.CharField(max_length=20, 
+                                widget=forms.PasswordInput())
     firstName = forms.CharField(max_length=30)
-    middleName = forms.CharField(max_length=30)
+    middleName = forms.CharField(max_length=30,
+                                    required=False)
     lastName = forms.CharField(max_length=30)
     dateOfBirth = forms.DateField(widget=extras.SelectDateWidget(years=range(1999,1939,-1)))
-    workNumber = forms.CharField(max_length=12)
-    cellNumber = forms.CharField(max_length=12)
+    workNumber = forms.CharField(max_length=12,
+                                    required=False)
+    cellNumber = forms.CharField(max_length=12,
+                                    required=False)
 
     RECRUITING = 0
     LOOKING = 1
@@ -19,7 +31,8 @@ class SignupForm(forms.Form):
 
 class LoginForm(forms.Form):
     email = forms.CharField(max_length=30)
-    password=forms.CharField(max_length=20)
+    password=forms.CharField(max_length=20,
+                                widget=forms.PasswordInput())
 
 class LookerForm(forms.Form):
     school = forms.CharField(max_length=50)
