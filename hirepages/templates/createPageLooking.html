@@ -6,18 +6,22 @@
 		<title>Hirepages</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
-		<link href="css/styles.css" type="text/css" rel="stylesheet">
 
-		<script type="text/javascript" src="../templates/auth.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
         <script type="text/javascript" src="http://platform.linkedin.com/in.js">
             api_key: 77ff77sr59nis6
-            onLoad: doneLogin
             authorize: true
         </script>
+		{% load staticfiles %}
+		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
+		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
+		<script src="{% static 'application.js' %}" type="text/javascript"></script>
+
+
 	</head>
 	<!-- header with logo and 'create profile' -->
 <header>
-	<h2><div class="inline strongV">Hire</div><div class="inline lightV">pages</div></h2>
+	<h2><div class="inline logo1">Hire</div><div class="inline logo2">pages</div></h2>
 	<p>Create Page - Looking</p>
 	
 </header>
@@ -30,7 +34,7 @@
 			<img class="saveIcon">
 			
 			<!-- *****put linkedin button here****** -->
-			<script type="in/Login"></script>
+			<script type="in/Login" data-onAuth="onLinkedInAuth" data-fields="positions"></script>
 			
 			<!-- Education Info -->
 			<div id="educationInfo">

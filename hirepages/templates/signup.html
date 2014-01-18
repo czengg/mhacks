@@ -6,20 +6,26 @@
 		<title>Hirepages</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+		
 		{% load staticfiles %}
 		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
 		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
 		<script src="{% static 'application.js' %}" type="text/javascript"></script>
 	</head>
 	<!-- header with logo and 'create profile' -->
-<header>
-	<h2><div class="inline logo1">Hire</div><div class="inline logo2">pages</div></h2>
-	<p>Create Profile</p>
-	
-</header>
+	<header>
+		<h2><div class="inline logo1">Hire</div><div class="inline logo2">pages</div></h2>
+		<p>Create Profile</p>
+		
+	</header>
 	<body id="signupBody">
 		{% load widget_tweaks %}
 		<form action="/signup" method="post">
+			{% for field in form %}
+				{{ field.errors }}
+			{% endfor %}
+
 			<!-- email/password -->
 			{{ form.email| attr:"placeholder:Enter your email" }}
 			{{ form.password| attr:"placeholder:Enter your password" }}
@@ -35,7 +41,7 @@
             <!-- phone number -->
             {{ form.workNumber| attr:"placeholder:Work number"}}
             {{ form.cellNumber| attr:"placeholder:Cell number"}}
-<!-- checkboxes to select if recruiting or looking -->
+			<!-- radio buttons to select if recruiting or looking -->
 			<p>Are you recruiting or looking to be hired?</p>
 			
 			{{ form.role }}
@@ -43,9 +49,5 @@
 			<!-- Continue button -->
 			<div id="signupButton" onclick="javascript:this.parentNode.submit();">Continue</div>
 		</form>
-		
-		
-		
-
 	</body>
 </html>
