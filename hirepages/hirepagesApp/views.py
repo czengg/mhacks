@@ -11,14 +11,19 @@ from hirepagesApp.models import User, Looker
 
 def signup(request):
     if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = User(email=cd['email'],
-                        firstName=cd['firstName'], 
+        roleType=2
+        user = User(email=request.POST['email'],
+                    password=request.POST['pwd'],
+                    firstName=request.POST['firstName']
+                    middleName=request.POST['middleName']
+                    lastName=request.POST['lastName']
+                    dateOfBirth=,
+                    workNumber=,
+                    cellNumber=,
+                    role=roleType)
+                         
     else:
-        form = SignupForm
-        return render(request, 'signup_page.html', {'form': form})
+        return render(request, 'signup_page.html', Context())
 
     
 def login(request):
