@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
+from django.forms.formsets import formset_factory
 
 from hirepagesApp.models import User, Looker
 from hirepagesApp.forms import *
@@ -76,9 +77,9 @@ def logout(request):
 ########### LOOKER CRUD #########################
 #################################################
  
-def create_looking_page(request):
+def createLookingPage(request):
     if "user" not in request.session:
-        return render(request, 'error_page.html', {'error': 'Please log in'})
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
     
@@ -104,29 +105,47 @@ def create_looking_page(request):
  
     else:
         form = LookerForm()
-        return render(request, 'createPageLooking.html', {'form':form})
+        ExperienceFormSet = formset_factory(ExperienceForm())
+        formset = ExperienceFormSet()
+        return render(request, 'createPageLooking.html', {'form':form, 
+                                                          'formset':formset})
 
 
 def read_looking_page(request):
     ctx = Context()
     if "user" not in request.session:
-        return render(request, 'error_page.html', {'error': 'Please log in'})
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
+    looker = Looker.objects.filter(userProfile=user)
+    ctx['school'] = looker.school
+    ctx['jobType'] = looker.jobType
+    ctx['active'] = looker.active
+    ctx['tags'] = looker.tags.all() 
+    return render(request, 'viewPageLooking.html', ctx)
 
-    return render(request, 'view_looking_page.html', ctx)
-
-def edit_looking_page(request):
-    ctx = Context()
-    return render(request, 'edit_looking_page.html', ctx)
 
 def update_looking_page(request):
-    ctx = Context()
-    return render(request, 'view_looking_page.html', ctx)
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
+
+    user = User.objects.filter(email=request.session["user"])
+    
+    if request.method == 'POST':
+        form = LookerForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+    
+    return render(request, 'createPageLooking.html', ctx)
+
 
 def delete_looking_page(request):
-    ctx = Context()
-    
-    return render(request, 'launch_page.html', ctx)
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
+
+    user = User.objects.filter(email=request.session["user"])
+    looker = Looker.objects.filter(userProfile=user)
+    looker.delete() 
+    return render(request, 'launch_page.html', Context())
 
 
