@@ -33,8 +33,10 @@ class User(models.Model):
                                     blank=True)
     lastName = models.CharField(max_length=30)
     dateOfBirth = models.DateField()
-    workNumber = models.CharField(max_length=12)
-    cellNumber = models.CharField(max_length=12)
+    workNumber = models.CharField(max_length=12,
+                                    blank=True)
+    cellNumber = models.CharField(max_length=12,
+                                    blank=True)
     RECRUITING = 0
     LOOKING = 1
     ROLE_IN_SYSTEM = (
