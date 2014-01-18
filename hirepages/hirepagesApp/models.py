@@ -13,7 +13,7 @@ class Looker(models.Model):
     jobType = models.IntegerField(choices=JOBTYPECHOICES, default=FULLTIME)
     active = models.BooleanField(default=True)
     tags = models.ManyToManyField(Tag)
-    lookerProfile = models.OneToOneField('User')
+    userProfile = models.OneToOneField('User')
 
 class Experience(models.Model):
     lookerId= models.ForeignKey(Looker)
@@ -46,7 +46,7 @@ class User(models.Model):
 
 class Recruiter(models.Model):
     company = models.ForeignKey('Company')
-    recruiterProfile = models.OneToOneField('User')
+    userProfile = models.OneToOneField('User')
 
 class Company(models.Model):
     description = models.TextField(max_length=200)

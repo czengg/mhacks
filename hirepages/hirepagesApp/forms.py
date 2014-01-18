@@ -16,3 +16,9 @@ class SignupForm(forms.Form):
     ROLE_IN_SYSTEM = ( (LOOKING, 'Looking'), (RECRUITING, 'Recruiting'),)
     role = forms.MultipleChoiceField(widget=forms.RadioSelect,
                                         choices=ROLE_IN_SYSTEM)
+
+def LoginForm(forms.Form):
+    email = forms.CharField(max_length=30)
+    password=forms.CharField(max_length=20)
+
+
