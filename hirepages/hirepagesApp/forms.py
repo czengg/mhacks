@@ -2,6 +2,7 @@ from django import forms
 
 class SignupForm(forms.Form):
     email = forms.CharField(max_length=30)    
+    password = forms.CharField(max_length=20, min_length=5)
     firstName = forms.CharField(max_length=30)
     middleName = forms.CharField(max_length=30, blank=True)
     lastName = forms.CharField(max_length=30)
