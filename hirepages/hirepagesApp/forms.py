@@ -53,5 +53,5 @@ class ExperienceForm(forms.Form):
     company = forms.CharField(max_length=50)
     description = forms.CharField(widget=forms.Textarea, max_length=200)
     tags = forms.CharField(max_length=100, widget=forms.Textarea)
-
-
+   
+    __name__ = 'ExperienceForm' 

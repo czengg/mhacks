@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.forms.formsets import formset_factory
 
-from hirepagesApp.models import User, Looker
+from hirepagesApp.models import User, Looker, Experience
 from hirepagesApp.forms import *
 
 #################################################
