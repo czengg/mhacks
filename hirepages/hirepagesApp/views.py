@@ -30,7 +30,14 @@ def signup(request):
                     role=cd['role'],)
             user.save()
             request.session["user"] = cd['email']
-            return render(request, 'login.html', Context())
+
+            RECRUITING = 0
+            LOOKING = 1
+
+            if cd['role'] == RECRUITING:
+                return render(request, 'createPageRecruiting.html', Context())
+            elif cd['role'] == LOOKING:
+                return render(request, 'createPageLooking.html', Context())
         else:
             print "invalid form"
             print form.errors
