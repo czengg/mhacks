@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from hirepagesApp.views import signup, login, logout, createLookingPage
+from hirepagesApp.views import signup, login, logout, createLookingPage, updateLookingPage
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -15,8 +15,8 @@ urlpatterns = patterns('',
     url(r'^signup$', signup),
     url(r'^login$', login),
     url(r'^logout$', logout),
-    url(r'^createlooking$', createLookingPage)
-
+    url(r'^createlooking$', createLookingPage),
+    url(r'^updatelooking$', updateLookingPage)
     #url(r'^admin/', include(admin.site.urls)),
 ) 
 
