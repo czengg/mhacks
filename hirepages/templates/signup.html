@@ -15,36 +15,56 @@
 	</head>
 	<!-- header with logo and 'create profile' -->
 	<header>
+		<div><p>Sign Up</p></div>
 		<h2><div class="inline logo1">Hire</div><div class="inline logo2">pages</div></h2>
-		<p>Create Profile</p>
 		
 	</header>
 	<body id="signupBody">
 		{% load widget_tweaks %}
 		<form action="/signup" method="post">
-			{% for field in form %}
+<!-- 			{% for field in form %}
 				{{ field.errors }}
-			{% endfor %}
+			{% endfor %} -->
 
 			<!-- email/password -->
 			{{ form.email| attr:"placeholder:Enter your email" }}
+			{{ form.email.errors }}
+
 			{{ form.password| attr:"placeholder:Enter your password" }}
+			{{ form.password.errors}}
 			
 			<!-- name -->
 			{{ form.firstName| attr:"placeholder:First Name" }}
+			{{ form.firstName.errors}}
+
 		    {{ form.middleName| attr:"placeholder:Middle Name" }}
+		    {{ form.middleName.errors}}
+
 		    {{ form.lastName| attr:"placeholder:Last Name" }}
+		    {{ form.lastName.errors}}
 			
 			<!-- birthday -->
-			{{ form.dateOfBirth }}
+			<div id="birthday">
+				Birthday:
+				{{ form.dateOfBirth }}
+				{{ form.dateOfBirth.errors}}
+			</div>
 
             <!-- phone number -->
             {{ form.workNumber| attr:"placeholder:Work number"}}
+            {{ form.workNumber.errors}}
+
             {{ form.cellNumber| attr:"placeholder:Cell number"}}
+            {{ form.cellNumber.errors}}
+
 			<!-- radio buttons to select if recruiting or looking -->
 			<p>Are you recruiting or looking to be hired?</p>
 			
-			{{ form.role }}
+			{{ form.role_choices.0 }}
+
+			{{ form.role_choices.1 }}
+
+			{{ form.role_choices.errors}}
 			
 			<!-- Continue button -->
 			<div id="signupButton" onclick="javascript:this.parentNode.submit();">Continue</div>

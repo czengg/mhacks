@@ -29,6 +29,23 @@ class SignupForm(forms.Form):
     role = forms.ChoiceField(widget=forms.RadioSelect,
                                         choices=ROLE_IN_SYSTEM)
 
+    def role_choices(self):
+        """
+        Returns role's widget's default renderer, which can be used to 
+            render the choices of a RadioSelect widget.
+        """
+        field = self['role']
+        widget = field.field.widget
+
+        attrs = {}
+        auto_id = field.auto_id
+        if auto_id and 'id' not in widget.attrs:
+            attrs['id'] = auto_id
+
+        name = field.html_name
+
+        return widget.get_renderer(name, field.value(), attrs=attrs)
+
 class LoginForm(forms.Form):
     email = forms.CharField(max_length=30)
     password=forms.CharField(max_length=20,
@@ -43,7 +60,8 @@ class LookerForm(forms.Form):
     jobType = forms.ChoiceField(widget=forms.RadioSelect,
                                             choices=JOBTYPECHOICES)
     active = forms.BooleanField()
-    skills = forms.CharField(max_length=100)
+    skills = forms.CharField(max_length=100,
+                                widget=forms.Textarea)
 
 
 class ExperienceForm(forms.Form):

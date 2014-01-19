@@ -4,51 +4,70 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Hirepages</title>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,700,800,600' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,300,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
-		<link href="css/styles.css" type="text/css" rel="stylesheet">
+		<link href="../css/reset.css" type="text/css" rel="stylesheet">
+		<link href="../css/styles.css" type="text/css" rel="stylesheet">
 	</head>
 	<!-- header with logo and 'create profile' -->
+	<body id="createPageRecruitingBody">
 <header>
-	<h2><div class="inline strongV">Hire</div><div class="inline lightV">pages</div></h2>
-	<p>Create Page</p>
+	<div><p>Create Page</p></div>
+	<h2><div class="inline logo1">Hire</div><div class="inline logo2">pages</div></h2>
+	
 	
 </header>
-	<body id="createPageRecruitingBody">
-		<form action="/createrecruit/" method="post">
+	
+		<form>
 			<!-- editing icons only visible once profile is created and user goes to edit-->
-			<img class="editIcon">
-			<img class="deleteIcon">
-			<img class="saveIcon">
+	
 			
 			<!-- Company Info -->
-			<div id="company info">
+			<div id="companyInfo">
+				<h3 id="experienceHeader">Company: </h3>
+				<div class="editButton">Edit</div>
 			<input type="text" placeholder="Company Name"/>
 			
 			<!-- checkbox to autopopulate company info -->
 			<label><input type="checkbox" name="Check company information">Check for existing company information</label>
-			<a><input type="url" name="Company website">Company Website</a>
-			<textarea>Company Description</textarea>
+			<a href="#"><input type="url" name="Company website" placeholder="Company Website"></a>
+			<textarea placeholder="Company Description"></textarea>
 			</div>
 			
-			<div class="positionSeeking">
-			<input type="text" placeholder="Position Seeking"/>
+			<div class="availablePositions">
+				<h3 id="experienceHeader">Available Position(s): </h3>
+				
 			
-			<input type="text" placeholder="Tags"/>
-			
-			<textarea>Position Description</textarea>
+				<div class="availablePositionsSections">
+					<img src="../img/deleteIcon.png" class="deleteIcon pageIcon">
+			<textarea placeholder="Position"></textarea>
+			<textarea placeholder="Tags seperate each tag with a space and a comma (ie. 'design, coding')"></textarea>
+			<textarea placeholder="Position Description"></textarea>
 			</div>
-			<img class="addIcon">
+			
+			</div>
+			<img src="../img/addIcon.png" class="addIcon pageIcon">
 	
 			
 			
-			
 			<!-- submit button -->
-			<input type="submit">Submit</input>
+			<div id="createPageButton" class="visible" href="#">Submit</div>
+	
+		
+		<div id="createPageButton" class="invisible" href="#">Done Editing</div>
 		</form>
+		
+	
 		
 		
 		
 
 	</body>
 </html>
+
+
+
+
+
+
+
