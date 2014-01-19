@@ -45,7 +45,7 @@
 				<div class="educationSection">
 					{{ form.school| attr:"placeholder:School" }}
 					{{ form.degree }}
-					{{ form.major }}
+					{{ form.major| attr:"placeholder:Major" }}
 				</div>
 			</div>
 			<img src="{% static 'img/addIcon.png' %}" class="addIcon pageIcon">
@@ -57,14 +57,17 @@
 				<p> (jobs, projects, etc.)</p>
 				<div class="experienceSection">
 					<img src="{% static 'img/deleteIcon.png' %}" class="deleteIcon pageIcon">
-					<input type="text" placeholder="Position"/>
-					<input type="text" placeholder="Company"/>
-					
-					
-					<!-- *****date pickers for start and end dates****** -->
+					{% for f in formset %}
+						{{ f.position| attr:"placeholder:Position" }}
+						{{ f.company| attr:"placeholder:Company"}}
+						
+						{{ f.startDate }}
+						{{ f.endDate }}
+						<!-- *****date pickers for start and end dates****** -->
 
-					<textarea placeholder="Tags seperate each tag with a space and a comma (ie. 'design, coding')"></textarea>
-					<textarea placeholder="Description"></textarea>
+						{{ f.tags| attr:"placeholder:Tags seperate each tag with a space and a comma (ie. 'design, coding')"}}
+						{{ f.description| attr:"placeholder: Description"}}
+					{% endfor %}
 				</div>
 			</div>
 			

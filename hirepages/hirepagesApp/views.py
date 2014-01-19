@@ -36,7 +36,7 @@ def signup(request):
 
             if cd['role'] == RECRUITING:
                 return render(request, 'createPageRecruiting.html', Context())
-            elif cd['role'] == LOOKING:
+            else:
                 return render(request, 'createPageLooking.html', Context())
         else:
             print "invalid form"
@@ -112,7 +112,7 @@ def createLookingPage(request):
  
     else:
         form = LookerForm()
-        ExperienceFormSet = formset_factory(ExperienceForm())
+        ExperienceFormSet = formset_factory(ExperienceForm)
         formset = ExperienceFormSet()
         return render(request, 'createPageLooking.html', {'form':form, 
                                                           'formset':formset})
