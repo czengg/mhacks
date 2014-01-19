@@ -25,15 +25,18 @@ body{
 
 .logo1{
 	font-family: 'Open Sans', sans-serif;
-	font-weight:400;
-	font-style:italic;
-	color:#ffffff;
+	font-weight:600;
+	/*font-style:italic;*/
+
+	
+	
 }
 
 .logo2{
 	font-family: 'Open Sans', sans-serif;
-	font-weight:800;
-	color:#1a6657;
+	font-weight:300;
+	
+	
 }
 
 #tagline{
@@ -50,38 +53,56 @@ h1{
 	margin-top:15px;
 	text-align: center;
 	font-size:33pt;
+	text-shadow:3px 3px #1b7f6c;
+	color:#dcfff4;
+	font-weight:700;
+	
 }
 
 h2{
-	font-size:12pt;
+	font-size:11pt;
 	display:inline;
 	
 	float:left;
 	padding-left:5px;
-padding-top:7px;
-margin-top:-33px;	
+padding-top:9px;
+margin-top:-34px;
+	color:#145145;
+	text-shadow:0px 0px;
 }
 
 h3{
+	font-size:14pt;
+	font-weight:400;
 	float:left;
 	margin-right:7px;
 }
 
+#landingBody{
+	margin:0 auto;
+	text-align:center;
+}
+
+
 #landingBody img{
-	width:50%;
+	padding-top:20px;
+	margin:0 auto;
+	width:200px;
+	/*width:50%;
 	margin-left:25%;
 	margin-right:25%;
 	padding-top:30px;
-	
+	*/
 }
 
 #landingButton{
 	font-family: 'Vollkorn', serif;
-	width:80%;
-	margin-left:9%;
-	margin-right:9%;
+	width:200px;
+	margin:0 auto;
 	position:fixed;
 	bottom:30px;
+	left:0;
+	right:0;
 		
 	/*width:80%;
 	margin-left:15%;
@@ -100,23 +121,33 @@ font-weight:400;
 	padding:7px 0px 5px 0;
 	text-align:center;
 	margin-top:20px;	
+	color:#BDEFE0;
 }
 
-#loginButton, #signupButton, #createPageButton{
+
+#loginButton, #signupButton, #createPageButton, #anythingButton, #startExploreButton{
 	font-family: 'Vollkorn', serif;
-	width:80%;
-	margin-left:9%;
-	margin-right:9%;
+	width:100px;
+	margin:0 auto;
 	background-color:#1b7f6c;
 font-weight:400;
-	font-size:14pt;
+	font-size:13pt;
 	padding:7px 5px 5px 5px;
 	text-align:center;
 	margin-top:20px;
 	margin-bottom:5px;
 }
 
-
+#anythingButton, #startExploreButton{
+	width:150px;
+		font-family: 'Vollkorn', serif;
+	margin:0 auto;
+	background-color:#1b7f6c;
+font-weight:400;
+	font-size:13pt;
+	padding:7px 5px 5px 5px;
+	text-align:center;
+}
 
 
 #loginBody #textInput{
@@ -136,7 +167,7 @@ width:100%;
 
 }
 
-.landingButton:hover, #loginButton:hover, #signupButton:hover, #createPageButton:hover, .doneEditingButton:hover{
+.landingButton:hover, #loginButton:hover, #signupButton:hover, #createPageButton:hover, .doneEditingButton:hover, #anythingButton:hover, #startExploreButton:hover{
 	background-color:#196656;
 }
 
@@ -144,13 +175,14 @@ width:100%;
 	margin-top:50px;
 }
 
-#getStarted, #loginButton, #signupButton, #createPageButton, .doneEditingButton, .editButton{
+ #loginButton, #signupButton, #createPageButton, .doneEditingButton, .editButton, #anythingButton, #startExploreButton, #searchBarButton{
 	color:#FFFFFF;
 }
 
 #login{
-	color:#75c8b0;
-	color:#FFFFFF;
+	
+	color:#BDEFE0;
+	
 }
 
 
@@ -181,7 +213,7 @@ width:100%;
 /***** signup page ****/
 
 #signupButton{
-	font-size:14pt;
+	font-size:13pt;
 }
 ul
 {
@@ -194,33 +226,39 @@ ul
 	margin-right:9%;
 }
 
-#createPageLookingBody form, #createPageRecruitingBody form{
+#createPageLookingBody form, #createPageRecruitingBody form, .exploreBody form {
 	width:80%;
 	margin-left:9%;
 	margin-right:9%;
 }
 
-#signupBody header, #createPageLookingBody header, #createPageRecruitingBody header{
+#signupBody header, #createPageLookingBody header, #createPageRecruitingBody header, .exploreBody header{
 	background-color:#13a085;
+	height:40px;
 	margin-bottom:20px;
 }
 
-#signupBody header div, #createPageLookingBody header div, #createPageRecruitingBody header div{
+#signupBody header div, #createPageLookingBody header div, #createPageRecruitingBody header div, .exploreBody header div{
 	width:80%;
 	margin:0 auto;
 	text-align:center;
+	padding-top:5px;
 }
 
-#signupBody header p, #createPageLookingBody header p, #createPageRecruitingBody header p{
-	line-height:24pt;
+#signupBody header p, #createPageLookingBody header p, #createPageRecruitingBody header p, .exploreBody header p{
+	line-height:26pt;
 	font-family: 'Vollkorn', serif;
 	display:inline;
 	color:#ffffff;	
-font-size:20px;
+	text-shadow:2px 2px #1b7f6c;
+font-size:24px;
 text-align:center;
+padding-bottom:20px;
+vertical-align:middle;
+
 }
 
-#signupBody input[type="text"], #signupBody input[type="password"], #createPageLookingBody input[type="text"], #createPageRecruitingBody input[type="text"]{
+#signupBody input[type="text"], #createPageLookingBody input[type="text"], #createPageRecruitingBody input[type="text"], .exploreBody input[type="search"]{
 	display:block;
 	margin-top:10px;
 	line-height:20px;
@@ -303,13 +341,13 @@ font-weight:400;
 
 }
 
-#createPageLookingBody input, #createPageLookingBody textarea, #createPageRecruitingBody input, #createPageRecruitingBody textarea{
+#createPageLookingBody input, #createPageLookingBody textarea, #createPageRecruitingBody input, #createPageRecruitingBody textarea, .exploreBody input{
 	width:100%;
 	display:block;
 	margin-top:10px;
 	line-height:20px;
 } 
-#createPageLookingBody form, #createPageRecruitingBody form, {
+#createPageLookingBody form, #createPageRecruitingBody form, .exploreBody form{
 	width:80%;
 }
 
@@ -318,6 +356,15 @@ font-weight:400;
 	font-size:8pt;
 padding-top:2px;
 float:left;
+}
+
+.exploreBody form p{
+	font-weight:400;
+	font-size:8pt;
+padding-top:2px;
+text-align: center;
+color:#1B7F6C;
+
 }
 
 #companyInfo input[type="checkbox"]{
@@ -374,4 +421,228 @@ font-weight:400;
 
 .availablePositionsSections{
 	margin-top:25px;
+}
+
+.profileIcon{
+	float:right;
+	width:20px;
+margin-top:-26px;
+margin-right:10px;
+}
+
+#barBreak{
+	width:100%;
+	height:2px;
+	background-color:#1B7F6C;
+	margin-top:-20px;
+}
+
+.searchbar form{
+	margin:0 auto;
+	max-width:350px;
+}
+
+#searchBarBackground{
+	background-color:#75C8B0;
+}
+
+.searchBar{
+	
+	height:40px;
+	margin-top:0px;
+	text-align:center;
+	margin:0 auto;
+	width:100%;
+	max-width:330px;
+}
+
+.searchBar input, .searchBar a{
+	float:left;	
+	margin:0 auto;
+}
+
+.searchBar input[type="search"]{
+	width:72%;
+	max-width:250px;
+margin-top:8px;	
+}
+
+.searchBar a{
+	
+	font-family: 'Vollkorn', serif;
+	background-color:#1B7F6C;
+font-weight:400;
+	font-size:9pt;
+	padding:4px 7px 2px 7px;
+	margin-bottom:2px;
+	text-align:center;
+	margin-top:11px;
+	margin-left:10px;
+}
+
+.yesOrNo{
+	display:inline-block;
+	padding-top:10px;
+	margin:0 auto;
+}
+
+
+.yesOrNo img{
+	width:40px;
+	margin-right:5px;
+	margin-bottom:10px;
+}
+
+#decision{
+	width:95px;
+	margin:0 auto;
+}
+
+
+.strong{
+	font-family: 'Vollkorn', serif;
+	font-weight:400;
+	font-size:18pt;
+	margin-bottom:0px;
+}
+
+
+.medium{
+	font-size:13pt;
+	font-weight:400;
+	margin-bottom:5px;
+}
+
+.mediumLight{
+	font-size:10pt;
+	font-weight:400;
+	margin-bottom:3px;
+}
+
+.lightV{
+	font-family: 'Vollkorn', serif;
+	font-weight:400;
+	font-size:10pt;
+
+}
+
+.gap{
+height:4px;
+	
+}
+
+a{
+	text-decoration: none;
+	color:#000000
+}
+
+.light{
+	font-size:10pt;
+	font-weight:300;
+	margin-top:4px;
+	
+}
+
+
+
+.pageContainer{
+	border:#13a085 solid 2px;
+	width:70%;
+	max-width:450px;
+	margin:0 auto;
+	padding:8%;
+	background-color:#ffffff;
+}
+
+.h3Display{
+	font-family: 'Vollkorn', serif;
+	margin-top:25px;
+	margin-bottom:5px;
+	font-size:12px;
+	color:#75c8b0;
+	color:#13a085;
+}
+
+.h3DisplayTop{
+	font-family: 'Vollkorn', serif;
+	margin-bottom:5px;
+	font-size:12px;
+	color:#75c8b0;
+	color:#13a085;
+}
+
+
+#skillsKey{
+	margin-bottom:0;
+}
+#backgroundColor{
+	background-color:#d6f2e9;
+}
+
+.spacing{
+	height:100px;
+}
+.removeTopMargin{
+	margin-top:0;
+}
+
+
+#signupBody header div, #createPageLookingBody header div, #createPageRecruitingBody header div{
+	width:80%;
+	margin:0 auto;
+	text-align:center;
+	padding-top:5px;
+}
+
+#signupBody header p, #createPageLookingBody header p, #createPageRecruitingBody header p, .exploreBody header p{
+	line-height:26pt;
+	font-family: 'Vollkorn', serif;
+	display:inline;
+	color:#ffffff;	
+	text-shadow:2px 2px #1b7f6c;
+font-size:24px;
+text-align:center;
+padding-bottom:20px;
+vertical-align:middle;
+
+}
+
+.exploreBody header div{
+	width:80%;
+
+	margin:0 auto;
+	text-align:center;
+}
+
+.logoHeader{
+	font-size:18pt;
+	text-shadow:2px 2px #1b7f6c;
+	margin-top:0;
+	color:#ffffff;
+	padding-top:0 ;
+	padding-top:0px ;
+	
+}
+
+.logoHeader div {
+	padding-top:0 !important;
+	margin-top:0 !important;
+}
+
+.logoHeader div p div{
+	padding-top:0 !important;
+	margin-top:0 !important;
+}
+
+
+
+
+@media all and (min-width: 650px) {
+	
+	.exploreBody header div{
+	width:550px;
+}
+	
+	
+	
 }

@@ -162,3 +162,7 @@ class PositionForm(forms.Form):
     state = forms.ChoiceField(choices=STATES)
 
     tags = forms.CharField(max_length=100, widget=forms.Textarea)
+
+class SearchForm(forms.Form):
+    tags = forms.CharField(max_length=100,
+                            widget=forms.Textarea)

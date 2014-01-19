@@ -78,8 +78,20 @@ def logout(request):
     form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-    
 
+#################################################
+############## SEARCH ###########################
+#################################################    
+
+def search(request):
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
+        
+    if request.method == 'POST':
+        print "hi"
+    else:
+        form = SearchForm()
+        return render(request, 'exploreStart.html', {'form':form})
 
 #################################################
 ########### LOOKER CRUD #########################
