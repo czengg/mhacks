@@ -11,9 +11,9 @@ class Looker(models.Model):
 
     HIGH_SCHOOL = 0
     BACHELORS = 1
-    MASETERS = 2
+    MASTERS = 2
     PHD = 3
-    DEGREE_CHOICES = ((HIGH SCHOOL, 'High School'), 
+    DEGREE_CHOICES = ((HIGH_SCHOOL, 'High School'), 
                       (BACHELORS, 'Bachelors'), 
                       (MASTERS, 'Masters'),
                       (PHD, 'Phd'),)
