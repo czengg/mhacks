@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
 from django.forms.formsets import formset_factory
+from django.http import HttpResponseRedirect
 
 from hirepagesApp.models import User, Looker, Experience, Tag
 from hirepagesApp.forms import *
@@ -35,9 +36,9 @@ def signup(request):
             LOOKING = 1
 
             if cd['role'] == RECRUITING:
-                return render(request, 'createPageRecruiting.html', Context())
+                return HttpResponseRedirect('/createrecruiting')
             else:
-                return render(request, 'createPageLooking.html', Context())
+                return HttpResponseRedirect('/createlooking')
         else:
             print "invalid form"
             print form.errors
@@ -279,7 +280,7 @@ def delete_looking_page(request):
     looker.delete() 
     return render(request, 'launch_page.html', Context())
 
-<<<<<<< HEAD
+
 ####################################################
 ########### RECRUITER CRUD #########################
 ####################################################
@@ -289,23 +290,57 @@ def createRecruitingPage(request):
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
-    print "create recruting"
+    print "create recruiting"
 
     if request.method == 'POST':
         form = CompanyForm(request.POST)
+        PositionFormSet = formset_factory(PositionForm)
+        formset = PositionFormSet(request.POST)
 
-
+        print "create recruiting post"  
         if form.is_valid():
+            print "valid form"
             cd = form.cleaned_data
-            school = cd['school']
-            jobType = cd['jobType']
-            active = cd['active']
-            skills = cd['skills']
-            looker = Looker(school=school, 
-                            jobType=jobType, 
-                            active=active, 
-                            userProfile=user) 
-            looker.save()
-=======
->>>>>>> dcc1fecd86f3aa381ce17cbf7375103cc6214771
+            description = cd['description']
+            name = cd['name']
+            linkToWebsite = cd['linkToWebsite']
+            company = Company(name=name,
+                            description=description, 
+                            linkToWebsite=linkToWebsite)
+
+            if formset.is_valid():
+                for f in formset:
+                    if f.is_valid():
+                        cd = f.cleaned_data
+                        pos = Position(description=cd['description'],
+                                        city=cd['city'],
+                                        role=cd['role'],
+                                        state=cd['state'])
+                        pos.save()
+                        company.save()
+
+                        rawTags = cd['tags']
+                        for rawTags in rawTags.split(","):
+                            tag = Tag(tag=rawTag)
+                            tag.save()
+                            pos.tags.add(tag)
+        else:
+            print "not valid betch"
+            print form.errors
+        return render(request, 'createPageRecruiting.html', Context())
+
+    else:
+        print "getting something something..."
+        if request.method == 'GET':
+            print "create looking get"
+        form = CompanyForm()
+        PositionFormSet = formset_factory(PositionForm)
+        formset = PositionFormSet()
+        return render(request, 'createPageRecruiting.html', {'form':form,
+                                                                'formset':formset})
+
+
+
+
+
 

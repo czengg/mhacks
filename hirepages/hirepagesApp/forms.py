@@ -86,11 +86,13 @@ class ExperienceForm(forms.Form):
     __name__ = 'ExperienceForm' 
 
 class CompanyForm(forms.Form):
+    name = forms.CharField(max_length=50)
     description = forms.CharField(widget=forms.Textarea,
                                     max_length=200)
     linkToWebsite = forms.URLField()
 
 class PositionForm(forms.Form):
+    name = forms.CharField(max_length=50)
     description = forms.CharField(widget=forms.Textarea,
                                     max_length=200)
     city = forms.CharField(max_length=50)
@@ -98,8 +100,8 @@ class PositionForm(forms.Form):
     FULLTIME = 0
     INTERNSHIP = 1
     TYPE_OF_POSITION = (
-        (FULLTIME, 'Looking'),
-        (INTERNSHIP, 'Recruiting'),
+        (FULLTIME, 'Full Time'),
+        (INTERNSHIP, 'Internship'),
     )
     role = forms.ChoiceField(choices=TYPE_OF_POSITION)
 
@@ -157,5 +159,6 @@ class PositionForm(forms.Form):
       ('WI', 'Wisconsin'),
       ('WY', 'Wyoming'),
     )
-    state = forms.ChoiceField(choices=STATES,
-                                max_length=2)
+    state = forms.ChoiceField(choices=STATES)
+
+    tags = forms.CharField(max_length=100, widget=forms.Textarea)

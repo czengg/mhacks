@@ -33,10 +33,9 @@ $(document).ready( function() {
         replacement))};
         if ($(el).context.id) {el.id = el.id.replace(id_regex, replacement)};
         if ($(el).context.name) {el.name = el.name.replace(id_regex, replacement)};
-        // console.log(ndx)
     }
 
-    function deleteForm(btn, prefix) {
+    function deleteExpForm(btn, prefix) {
         var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
         if (formCount > 1) {
             // Delete the item/form
@@ -58,7 +57,7 @@ $(document).ready( function() {
         return false;
     }
 
-    function addForm(btn, prefix) {
+    function addExpForm(btn, prefix) {
         var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
 
         // You can only submit a maximum of 10 todo items 
@@ -82,7 +81,7 @@ $(document).ready( function() {
 
         // Add an event handler for the delete item/form link 
         $(row).find(".experienceDelete").click(function () {
-            return deleteForm(this, prefix);
+            return deleteExpForm(this, prefix);
         });
 
         $($(row).find(".start_date")[0]).datepicker();
@@ -94,11 +93,11 @@ $(document).ready( function() {
     }
     // Register the click event handlers
     $("#experienceAdd").click(function () {
-        return addForm(this, "form");
+        return addExpForm(this, "form");
     });
 
     $(".experienceDelete").click(function () {
-        return deleteForm(this, "form");
+        return deleteExpForm(this, "form");
     });
 
 	$("#createPageButton").click(function() {
@@ -107,6 +106,70 @@ $(document).ready( function() {
 
 	$("id_form-0-start_date").datepicker();
 	$("id_form-0-end_date").datepicker();
+
+    function deletePosForm(btn, prefix) {
+        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (formCount > 1) {
+            // Delete the item/form
+            $(btn).parents('.experienceFormset').remove();
+            var forms = $('.experienceFormset'); // Get all the forms  
+            // Update the total number of forms (1 less than before)
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            var i = 0;
+            // Go through the forms and set their indices, names and IDs
+            for (formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).children().children().each(function () {
+                    if ($(this).attr('type') == 'text') updateElementIndex(this, prefix, i);
+                });
+            }
+        } // End if
+        else {
+            alert("You have to enter at least one experience item!");
+        }
+        return false;
+    }
+
+    function addPosForm(btn, prefix) {
+        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+
+        // You can only submit a maximum of 10 todo items 
+        // Clone a form (without event handlers) from the first form
+        var row = $(".experienceFormset:first").clone(false).get(0);
+        // Insert it after the last form
+        $(row).removeAttr('id').hide().insertAfter(".experienceFormset:last").slideDown(300);
+
+        // Remove the bits we don't want in the new row/form
+        // e.g. error messages
+        $(".errorlist", row).remove();
+        $(row).children().removeClass("error");
+
+        window.co = formCount;
+
+        console.log($(row))
+
+        // Relabel or rename all the relevant bits
+        $(row).children().each(function() {
+            updateElementIndex(this, prefix, window.co);
+            $(this).val("");
+        });
+
+        // Add an event handler for the delete item/form link 
+        $(row).find(".positionDelete").click(function () {
+            return deletePosForm(this, prefix);
+        });
+
+        // Update the total form count
+        $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
+        return false;
+    }
+    // Register the click event handlers
+    $("#positionAdd").click(function () {
+        return addPosForm(this, "form");
+    });
+
+    $(".positionDelete").click(function () {
+        return deletePosForm(this, "form");
+    });
 })
 
 

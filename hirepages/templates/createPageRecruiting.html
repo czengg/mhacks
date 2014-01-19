@@ -6,8 +6,14 @@
 		<title>Hirepages</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,300,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
-		<link href="../css/reset.css" type="text/css" rel="stylesheet">
-		<link href="../css/styles.css" type="text/css" rel="stylesheet">
+		
+		{% load staticfiles %}
+		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
+		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
+		<link href="{% static 'likingpage.css' %}" type="text/css" rel="stylesheet">
+		<link href="{% static 'jquery-ui/css/custom-theme/jquery-ui.custom.min.css' %}" type="text/css" rel="stylesheet">
+		<script src="{% static 'application.js' %}" type="text/javascript"></script>
+		<script src="{% static 'jquery-ui/jquery-ui.custom.min.js' %}" type="text/javascript"></script>
 	</head>
 	<!-- header with logo and 'create profile' -->
 	<body id="createPageRecruitingBody">
@@ -18,15 +24,16 @@
 	
 </header>
 	
-		<form>
+		{% load widget_tweaks %}
+		<form id="recruitingForm" action="/createrecruiting" method="post">
 			<!-- editing icons only visible once profile is created and user goes to edit-->
 	
 			
 			<!-- Company Info -->
 			<div id="companyInfo">
-				<h3 id="experienceHeader">Company: </h3>
+				<h3 id="companyHeader">Company: </h3>
 				<div class="editButton">Edit</div>
-			<input type="text" placeholder="Company Name"/>
+				{{ form.name| attr:"placeholder:Company name"  }}
 			
 			<!-- checkbox to autopopulate company info -->
 			<label><input type="checkbox" name="Check company information">Check for existing company information</label>
@@ -35,33 +42,29 @@
 			</div>
 			
 			<div class="availablePositions">
-				<h3 id="experienceHeader">Available Position(s): </h3>
-				
-			
+				{{ formset.management_form }}
+				{% for f in formset %}
+				<h3 id="positionHeader">Available Position(s): </h3>
 				<div class="availablePositionsSections">
-					<img src="../img/deleteIcon.png" class="deleteIcon pageIcon">
-			<textarea placeholder="Position"></textarea>
-			<textarea placeholder="Tags seperate each tag with a space and a comma (ie. 'design, coding')"></textarea>
-			<textarea placeholder="Position Description"></textarea>
+					<img src="{% static 'img/deleteIcon.png' %}" class="deleteIcon pageIcon positionDelete">
+					{{ f.city| attr:"placeholder:Position city"| add_class:"positionCity" }}
+					{{ f.state| add_class:"positionState" }}
+					{{ f.role }}
+
+					{{ f.name| attr:"placeholder:Position" }}
+					{{ f.tags| attr:"placeholder:Tags seperate each tag with a space and a comma (ie. 'design, coding')" }}
+					{{ f.description| attr:"placeholder:Position description" }}
+				</div>
+				{% endfor %}
+				<img src="{% static 'img/addIcon.png' %}" class="addIcon pageIcon" id="positionAdd">
 			</div>
-			
-			</div>
-			<img src="../img/addIcon.png" class="addIcon pageIcon">
-	
-			
 			
 			<!-- submit button -->
 			<div id="createPageButton" class="visible" href="#">Submit</div>
 	
 		
-		<div id="createPageButton" class="invisible" href="#">Done Editing</div>
+			<div id="createPageButton" class="invisible" href="#">Done Editing</div>
 		</form>
-		
-	
-		
-		
-		
-
 	</body>
 </html>
 

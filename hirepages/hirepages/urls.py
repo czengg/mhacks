@@ -3,7 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-from hirepagesApp.views import signup, login, logout, createLookingPage, updateLookingPage
+from hirepagesApp.views import signup, login, logout, createLookingPage, updateLookingPage, createRecruitingPage
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 

@@ -14,3 +14,19 @@
 #createPageLookingBody input[type="text"]#id_degree {
 	display: inline-block;
 }
+
+#positionHeader {
+	display: block;
+	margin-bottom: 10px;
+	margin-right: 50%;
+}
+
+#createPageRecruitingBody input[type="text"].positionCity {
+	width: 50%;
+	margin: 0;
+	margin-right: 0;
+}
+
+#createPageRecruitingBody input[type="text"].positionState {
+	display: inline-block;
+}
