@@ -121,6 +121,7 @@ def createLookingPage(request):
             if formset.is_valid():
                 for f in formset:
                     if f.is_valid():
+                        print "valid form set"
                         cd = f.cleaned_data
                         exp= Experience(startDate=cd['startDate'],
                                         endDate=cd['endDate'], 
@@ -137,7 +138,8 @@ def createLookingPage(request):
         else:
             print "not valid son"
             print form.errors
-        return render(request, 'createPageLooking.html', Context())
+        return render(request, 'createPageLooking.html', {'form':form, 
+                                                       'formset':formset})
  
     else:
         print "getting something..."
@@ -235,7 +237,6 @@ def updateLookingPage(request):
                             tag.save()
                             exp.tags.add(tag)
         
-            
             render(request, 'createPageLooking.html', {'form':form})
         else:
            render(request, 'createPageLooking.html', {'form':form, 
@@ -249,22 +250,25 @@ def updateLookingPage(request):
                                    'jobType':looker.jobType,
                                    'skills':(",".join(tags)),})    
  
-        experiences = Experience.object.filter(lookerId=looker.id).list()
-        ExperienceFormSet = formset_factory(ExperienceForm, experiences.count())
+        experiences = Experience.objects.filter(lookerId=looker.id)
+        count = experiences.count()
+        print "count", count, looker.id
+        ExperienceFormSet = formset_factory(ExperienceForm, extra=count-1)
         index = 0
-        
-        formset = ExperienceFormSet()
-        for f in formset:
-            exp = experiences[index]
+       
+        exps = []
+        for exp in experiences:
             tags = [rawtag.tag for rawtag in exp.tags.all()]
-            newForm = ExperienceForm({'startDate':exp.startDate,
-                                      'endDate':exp.endDate,
-                                      'position':exp.position,
-                                      'company':exp.company,
-                                      'description':exp.description, 
-                                      'tags':",".join(tags)})   
-            f = newForm
-            index += 1
+            newExp = {'lookerId':exp.lookerId,
+                      'startDate':exp.startDate,
+                      'endDate':exp.endDate,
+                      'description':exp.description,
+                      'position':exp.position,
+                      'company':exp.company, 
+                      'tags':",".join(tags)}
+            exps += [newExp]      
+
+        formset = ExperienceFormSet(initial=exps)
         
         return render(request, 'createPageLooking.html', {'form':form,
                                                         'formset':formset})
