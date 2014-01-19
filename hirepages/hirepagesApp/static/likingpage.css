@@ -30,3 +30,7 @@
 #createPageRecruitingBody input[type="text"].positionState {
 	display: inline-block;
 }
+
+#createPageRecruitingBody .positionForm {
+	margin-top: 10px;
+}
