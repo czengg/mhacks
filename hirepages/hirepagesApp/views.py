@@ -356,6 +356,86 @@ def createRecruitingPage(request):
                                                                 'formset':formset})
 
 
+def updateRecruitingPage(request):
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
+
+    print "update recruiting"
+    user = User.objects.get(email=request.session["user"])
+    print "user"
+    print user
+    recruiter = Recruiter.objects.get(userProfile=user)
+    print "recruiter"
+    print recruiter
+    company = recruiter.company   
+
+ 
+    if request.method == 'POST':
+        print "update recruiting post"
+        form = CompanyForm(request.POST)
+        PositionFormSet = formset_factory(PositionForm)
+        formset = PositionFormSet(request.POST)
+        
+        if form.is_valid():
+            cd = form.cleaned_data
+            company.name = cd['name']
+            company.description = cd['description']
+            company.linkToWebsite = cd['linkToWebsite']       
+            company.save()
+    
+             
+            oldPoss = Position.objects.filter(recruiter=recruiter.id)
+            for oldPos in oldPoss:
+                oldPos.delete()
+ 
+            if formset.is_valid():
+                for f in formset:
+                    if f.is_valid():
+                        cd = f.cleaned_data
+                        pos = Position(description=cd['description'],
+                                       recruiter=recruiter, 
+                                       city=cd['city'],
+                                       role=cd['role'],
+                                       state=cd['state'])
+                        pos.tags.clear()
+                        pos.save()
+
+                        rawTags = cd['tags']
+                        for rawTag in rawTags.split(","):
+                            tag = Tag(tag=rawTag)
+                            tag.save()
+                            pos.tags.add(tag)
+        
+            render(request, 'createPageRecruiting.html', {'form':form})
+        else:
+           render(request, 'createPageRecruiting.html', {'form':form, 
+                                                      'error':'Problem updating looker'}) 
+    else:
+        print "update recruiting get"
+        form = CompanyForm(initial={'name':company.name,
+                                    'description':company.description,
+                                    'linkToWebsite':company.linkToWebsite,}) 
+
+        positions = Position.objects.filter(recruiter=recuiter.id) 
+        count = positions.count()
+        print "count", count, recruiter.id
+        PositionFormSet = formset_factory(PositionForm, extra=count-1)
+       
+        poss = []
+        for pos in positions:
+            tags = [rawtag.tag for rawtag in pos.tags.all()]
+            newPos = {'name':pos.name,
+                      'description':pos.description,
+                      'city':pos.city,
+                      'role':pos.role,
+                      'state':pos.state,
+                      'tags':",".join(tags)}
+            poss += [newPos]
+
+        formset = PositionFormSet(initial=poss)
+        
+        return render(request, 'createPageRecruiting.html', {'form':form,
+                                                        'formset':formset})
 
 
 
