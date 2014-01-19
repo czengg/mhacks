@@ -57,6 +57,18 @@ class LookerForm(forms.Form):
     INTERNSHIP = 0
     FULLTIME = 1
     JOBTYPECHOICES = ((INTERNSHIP, 'Internship'), (FULLTIME, 'FullTime'),)
+
+    HIGH_SCHOOL = 0
+    BACHELORS = 1
+    MASTERS = 2
+    PHD = 3
+    DEGREE_CHOICES = ((HIGH_SCHOOL, 'High_School'),
+                     (BACHELORS, 'Bachelors'), 
+                     (MASTERS, 'Masters'), 
+                     (PHD, 'Phd'),)
+
+    degree = forms.ChoiceField(choices=DEGREE_CHOICES)
+    major = forms.CharField(max_length=50)
     jobType = forms.ChoiceField(widget=forms.RadioSelect,
                                             choices=JOBTYPECHOICES)
     active = forms.BooleanField()
