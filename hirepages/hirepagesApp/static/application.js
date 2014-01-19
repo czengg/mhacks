@@ -47,6 +47,9 @@ $(document).ready( function() {
 	$("#createPageButton").click(function() {
 		$("#lookingForm").submit();
 	})
+
+	$(".start_date").datepicker();
+	$(".end_date").datepicker();
 })
 
 
