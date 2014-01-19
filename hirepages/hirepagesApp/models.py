@@ -4,38 +4,6 @@ class Tag(models.Model):
     tag = models.CharField(max_length=50)
 
 
-class Looker(models.Model):
-    INTERNSHIP = 0
-    FULLTIME = 1
-    JOBTYPECHOICES = ((INTERNSHIP, 'Internship'), (FULLTIME, 'FullTime'),)
-
-    HIGH_SCHOOL = 0
-    BACHELORS = 1
-    MASTERS = 2
-    PHD = 3
-    DEGREE_CHOICES = ((HIGH_SCHOOL, 'High School'), 
-                      (BACHELORS, 'Bachelors'), 
-                      (MASTERS, 'Masters'),
-                      (PHD, 'Phd'),)
-
-    school = models.CharField(max_length=50)
-    degree = models.IntegerField(choices=DEGREE_CHOICES, default=HIGH_SCHOOL)
-    major = models.CharField(max_length=50)
-    jobType = models.IntegerField(choices=JOBTYPECHOICES, default=FULLTIME)
-    active = models.BooleanField(default=True)
-    tags = models.ManyToManyField(Tag)
-    userProfile = models.OneToOneField('User')
-
-class Experience(models.Model):
-    lookerId= models.ForeignKey(Looker)
-    startDate = models.DateField()
-    endDate = models.DateField()
-    description = models.TextField(max_length=200)
-    position = models.CharField(max_length=50)
-    company = models.CharField(max_length=50)
-    tags = models.ManyToManyField(Tag)
-
-
 class User(models.Model):
     email = models.EmailField()
     password = models.CharField(max_length=20)
@@ -56,6 +24,39 @@ class User(models.Model):
     )
     role = models.PositiveIntegerField(choices=ROLE_IN_SYSTEM,
                                         default=LOOKING)
+
+
+class Looker(models.Model):
+    INTERNSHIP = 0
+    FULLTIME = 1
+    JOBTYPECHOICES = ((INTERNSHIP, 'Internship'), (FULLTIME, 'FullTime'),)
+
+    HIGH_SCHOOL = 0
+    BACHELORS = 1
+    MASTERS = 2
+    PHD = 3
+    DEGREE_CHOICES = ((HIGH_SCHOOL, 'High School'), 
+                      (BACHELORS, 'Bachelors'), 
+                      (MASTERS, 'Masters'),
+                      (PHD, 'Phd'),)
+
+    school = models.CharField(max_length=50)
+    degree = models.IntegerField(choices=DEGREE_CHOICES, default=HIGH_SCHOOL)
+    major = models.CharField(max_length=50)
+    jobType = models.IntegerField(choices=JOBTYPECHOICES, default=FULLTIME)
+    active = models.BooleanField(default=True)
+    tags = models.ManyToManyField(Tag)
+    userProfile = models.OneToOneField(User)
+
+class Experience(models.Model):
+    lookerId= models.ForeignKey(Looker)
+    startDate = models.DateField()
+    endDate = models.DateField()
+    description = models.TextField(max_length=200)
+    position = models.CharField(max_length=50)
+    company = models.CharField(max_length=50)
+    tags = models.ManyToManyField(Tag)
+
 
 class Recruiter(models.Model):
     company = models.ForeignKey('Company')

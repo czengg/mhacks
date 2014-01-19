@@ -4,7 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.forms.formsets import formset_factory
 
-from hirepagesApp.models import User, Looker, Experience
+from hirepagesApp.models import User, Looker, Experience, Tag
 from hirepagesApp.forms import *
 
 #################################################
@@ -173,14 +173,20 @@ def read_looking_page(request):
     return render(request, 'viewPageLooking.html', ctx)
 
 
-def update_looking_page(request):
+def updateLookingPage(request):
     if "user" not in request.session:
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
-    looker = Looker.objects.filter(userProfile=user)
-    
+    print "user"
+    print user
+    looker = Looker.objects.get(userProfile=user)
+    print "looker"
+    print looker   
+
+    print "update looking"  
     if request.method == 'POST':
+        print "update looking post"
         form = LookerForm(request.POST)
         ExperienceFormSet = formset_factory(ExperienceForm)
         formset = ExperienceFormSet(request.POST)
@@ -230,6 +236,7 @@ def update_looking_page(request):
            render(request, 'createPageLooking.html', {'form':form, 
                                                       'error':'Problem updating looker'}) 
     else:
+        print "update looking get"
         tags = [rawtag.tag for rawtag in looker.tags.all()]
         form = LookerForm(initial={'school':looker.school, 
                                    'major':looker.major,
