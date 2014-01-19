@@ -58,12 +58,10 @@
 				<h3 id="experienceHeader">Experience: </h3>
 				<p> (jobs, projects, etc.)</p>
 				<div class="experienceSection">
-					
+					{{ formset.management_form }}
 					{% for f in formset %}
 						<div class="experienceFormset">
 							<div class="experienceForm">
-								<!-- {{ f.DELETE }}
-								{% if f.instance.pk %}{{ f.DELETE }}{% endif %} -->
 								<img src="{% static 'img/deleteIcon.png' %}" class="deleteIcon pageIcon experienceDelete">
 								<div class="experienceFields">
 									{{ f.position| attr:"placeholder:Position" }}
@@ -71,10 +69,11 @@
 									
 									{{ f.startDate| attr:"placeholder:Start date"| add_class:"start_date" }}
 									{{ f.endDate| attr:"placeholder:End date"| add_class:"end_date" }}
-									<!-- *****date pickers for start and end dates****** -->
+
+									{{ f.description| attr:"placeholder: Description"}}
 
 									{{ f.tags| attr:"placeholder:Tags seperate each tag with a space and a comma (ie. 'design, coding')"}}
-									{{ f.description| attr:"placeholder: Description"}}
+									
 								</div>
 							</div>
 						</div>

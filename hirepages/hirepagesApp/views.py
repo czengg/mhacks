@@ -155,4 +155,39 @@ def delete_looking_page(request):
     looker.delete() 
     return render(request, 'launch_page.html', Context())
 
+####################################################
+########### RECRUITER CRUD #########################
+####################################################
 
+def createRecruitingPage(request):
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
+
+    user = User.objects.filter(email=request.session["user"])
+    
+    if request.method == 'POST':
+        form = RecruiterForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            school = cd['school']
+            jobType = cd['jobType']
+            active = cd['active']
+            skills = cd['skills']
+            looker = Looker(school=school, 
+                            jobType=jobType, 
+                            active=active, 
+                            userProfile=user) 
+            looker.save()
+
+            for skill in skills.split(","):
+                tag = Tag(tag=skill)
+                tag.save()
+                looker.tags.add(tag)
+        return render(request, 'createPageLooking.html', Context())
+ 
+    else:
+        form = LookerForm()
+        ExperienceFormSet = formset_factory(ExperienceForm)
+        formset = ExperienceFormSet()
+        return render(request, 'createPageLooking.html', {'form':form, 
+                                                          'formset':formset})
