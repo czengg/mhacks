@@ -92,6 +92,9 @@ def createLookingPage(request):
     
     if request.method == 'POST':
         form = LookerForm(request.POST)
+        ExperienceFormSet = formset_factory(ExperienceForm)
+        formset = ExperienceFormSet(request.POST)
+        
         if form.is_valid():
             cd = form.cleaned_data
             school = cd['school']
@@ -100,7 +103,7 @@ def createLookingPage(request):
             skills = cd['skills']
             looker = Looker(school=school, 
                             jobType=jobType, 
-        v   df                    active=active, 
+                            active=active, 
                             userProfile=user) 
             looker.save()
 
@@ -108,6 +111,23 @@ def createLookingPage(request):
                 tag = Tag(tag=skill)
                 tag.save()
                 looker.tags.add(tag)
+
+            if formset.is_valid():
+                for f in formset:
+                    if f.is_valid():
+                        cd = f.cleaned_data
+                        exp= Experience(startDate=cd['startDate'],
+                                        endDate=cd['endDate'], 
+                                        position=cd['position'],
+                                        company=cd['company'],
+                                        description=cd['description'],
+                                        lookerId=looker)
+                        exp.save()
+                        rawTags = cd['tags']
+                        for rawTag in rawTags.split(","):
+                            tag = Tag(tag=rawTag)
+                            tag.save()
+                            exp.tags.add(tag)
         return render(request, 'createPageLooking.html', Context())
  
     else:
@@ -128,7 +148,23 @@ def read_looking_page(request):
     ctx['school'] = looker.school
     ctx['jobType'] = looker.jobType
     ctx['active'] = looker.active
-    ctx['tags'] = looker.tags.all() 
+
+    tags = [rawtag.tag for rawtag in looker.tags.all()]
+    ctx['tags'] = ",".join(tags)
+
+    experiences = Experience.objects.filter(lookerId=looker)
+    expdict = dict()
+    for experience in experiences:
+        d = dict()
+        d['startDate'] = experience.startDate
+        d['endDate'] = experience.endDate
+        d['description'] = experience.description
+        d['position'] = experience.position
+        d['company'] = experience.company
+        tags = [rawtag.tag for rawtag in experience.tags.all()]
+        d['tags'] = ",".join(tags)
+        expdict[experience] = d
+    ctx['experiences'] = expdict
     return render(request, 'viewPageLooking.html', ctx)
 
 
@@ -141,6 +177,9 @@ def update_looking_page(request):
     
     if request.method == 'POST':
         form = LookerForm(request.POST)
+        ExperienceFormSet = formset_factory(ExperienceForm)
+        formset = ExperienceFormSet(request.POST)
+        
         if form.is_valid():
             cd = form.cleaned_data
             looker.school = cd['school']
@@ -148,13 +187,71 @@ def update_looking_page(request):
             looker.degree = cd['degree']
             looker.jobType = cd['jobType']
             looker.active = cd['active']
-            # TODO TAGS 
-            looker.save() 
+            looker.tags.clear()
+            looker.save()
+ 
+            skills = cd['skills']
+            for skill in skills.split(","):
+                tag = Tag(tag=skill)
+                tag.save()
+                looker.tags.add(tag)
+
+            oldexps = Experience.objects.filter(lookerId=looker.id)
+            for oldexp in oldexps:
+                oldexp.delete()
+
+            if formset.is_valid():
+                for f in formset:
+                    if f.is_valid():
+                        cd = f.cleaned_data
+                        exp= Experience(startDate=cd['startDate'],
+                                        endDate=cd['endDate'], 
+                                        position=cd['position'],
+                                        company=cd['company'],
+                                        description=cd['description'],
+                                        lookerId=looker)
+                        exp.tags.clear()
+                        exp.save()
+
+                        rawTags = cd['tags']
+                        for rawTag in rawTags.split(","):
+                            tag = Tag(tag=rawTag)
+                            tag.save()
+                            exp.tags.add(tag)
+        
+            
+            render(request, 'createPageLooking.html', {'form':form})
+        else:
+           render(request, 'createPageLooking.html', {'form':form, 
+                                                      'error':'Problem updating looker'}) 
     else:
-        # add all the shit to form to send it back 
+        tags = [rawtag.tag for rawtag in looker.tags.all()]
+        form = LookerForm(initial={'school'=looker.school, 
+                                   'major'=looker.major,
+                                   'degree'=looker.degree,
+                                   'jobType'=looker.jobType,
+                                   'active'=looker.active, 
+                                   'skills'=",".join(tags),})    
+ 
+        experiences = Experience.object.filter(lookerId=looker.id).list()
+        ExperienceFormSet = formset_factory(ExperienceForm, experiences.count())
+        index = 0
         
+        formset = ExperienceFormSet()
+        for f in formset:
+            exp = experiences[index]
+            tags = [rawtag.tag for rawtag in exp.tags.all()]
+            newForm = ExperienceForm({'startDate':exp.startDate,
+                                      'endDate':exp.endDate,
+                                      'position':exp.position,
+                                      'company':exp.company,
+                                      'description':exp.description, 
+                                      'tags':",".join(tags)})   
+            f = newForm
+            index += 1
         
-    return render(request, 'createPageLooking.html', ctx)
+        return render(request, 'createPageLooking.html', {'form':form,
+                                                        'formset':formset})
 
 
 def delete_looking_page(request):
