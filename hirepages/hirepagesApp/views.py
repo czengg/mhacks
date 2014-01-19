@@ -98,6 +98,7 @@ def createLookingPage(request):
         
         print "create looking post"        
         if form.is_valid():
+            print "valid form"
             cd = form.cleaned_data
             school = cd['school']
             jobType = cd['jobType']
