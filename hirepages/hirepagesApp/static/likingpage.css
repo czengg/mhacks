@@ -1,0 +1,16 @@
+#createPageLookingBody input[type="text"].start_date, 
+#createPageLookingBody input[type="text"].end_date {
+	margin-left: .3%;
+	margin-right: .3%;
+	width: 48%;
+	display: inline-block;
+}
+
+#createPageLookingBody input[type="text"]#id_major {
+	width: 50%;
+	display: inline-block;
+}
+
+#createPageLookingBody input[type="text"]#id_degree {
+	display: inline-block;
+}
