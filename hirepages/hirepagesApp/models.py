@@ -63,12 +63,10 @@ class Recruiter(models.Model):
     userProfile = models.OneToOneField('User')
 
 class Company(models.Model):
-    name = models.TextField(max_length=50)
     description = models.TextField(max_length=200)
     linkToWebsite = models.URLField()
 
 class Position(models.Model):
-    name = models.TextField(max_length=50)
     description = models.TextField(max_length=200)
     recruiter = models.ForeignKey('Recruiter')
     city = models.CharField(max_length=50)
@@ -76,8 +74,8 @@ class Position(models.Model):
     FULLTIME = 0
     INTERNSHIP = 1
     TYPE_OF_POSITION = (
-        (FULLTIME, 'Full Time'),
-        (INTERNSHIP, 'Internship'),
+        (FULLTIME, 'Looking'),
+        (INTERNSHIP, 'Recruiting'),
     )
     role = models.PositiveIntegerField(choices=TYPE_OF_POSITION,
                                         default=FULLTIME)

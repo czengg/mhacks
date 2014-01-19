@@ -344,7 +344,18 @@ def createRecruitingPage(request):
                                                                 'formset':formset})
 
 
+def updateRecruitingPage(request):
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
 
+    user = User.objects.filter(email=request.session["user"])
+    print "create recruiting"
+
+    if request.method == 'POST':
+        print "update recruiting post"
+
+    else:
+        print "update recruiting get"
 
 
 
