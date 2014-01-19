@@ -283,4 +283,33 @@ def delete_looking_page(request):
     looker.delete() 
     return render(request, 'launch_page.html', Context())
 
+<<<<<<< HEAD
+####################################################
+########### RECRUITER CRUD #########################
+####################################################
+
+def createRecruitingPage(request):
+    if "user" not in request.session:
+        return render(request, 'errorPage.html', {'error': 'Please log in'})
+
+    user = User.objects.filter(email=request.session["user"])
+    print "create recruting"
+
+    if request.method == 'POST':
+        form = CompanyForm(request.POST)
+
+
+        if form.is_valid():
+            cd = form.cleaned_data
+            school = cd['school']
+            jobType = cd['jobType']
+            active = cd['active']
+            skills = cd['skills']
+            looker = Looker(school=school, 
+                            jobType=jobType, 
+                            active=active, 
+                            userProfile=user) 
+            looker.save()
+=======
+>>>>>>> dcc1fecd86f3aa381ce17cbf7375103cc6214771
 

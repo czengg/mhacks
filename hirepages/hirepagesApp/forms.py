@@ -84,3 +84,78 @@ class ExperienceForm(forms.Form):
     tags = forms.CharField(max_length=100, widget=forms.Textarea)
    
     __name__ = 'ExperienceForm' 
+
+class CompanyForm(forms.Form):
+    description = forms.CharField(widget=forms.Textarea,
+                                    max_length=200)
+    linkToWebsite = forms.URLField()
+
+class PositionForm(forms.Form):
+    description = forms.CharField(widget=forms.Textarea,
+                                    max_length=200)
+    city = forms.CharField(max_length=50)
+
+    FULLTIME = 0
+    INTERNSHIP = 1
+    TYPE_OF_POSITION = (
+        (FULLTIME, 'Looking'),
+        (INTERNSHIP, 'Recruiting'),
+    )
+    role = forms.ChoiceField(choices=TYPE_OF_POSITION)
+
+    STATES = (
+      ('AL', 'Alabama'),
+      ('AK', 'Alaska'),
+      ('AZ', 'Arizona'),
+      ('AR', 'Arkansas'),
+      ('CA', 'California'),
+      ('CO', 'Colorado'),
+      ('CT', 'Connecticut'),
+      ('DE', 'Delaware'),
+      ('DC', 'District of Columbia'),
+      ('FL', 'Florida'),
+      ('GA', 'Georgia'),
+      ('HI', 'Hawaii'),
+      ('ID', 'Idaho'),
+      ('IL', 'Illinois'),
+      ('IN', 'Indiana'),
+      ('IA', 'Iowa'),
+      ('KS', 'Kansas'),
+      ('KY', 'Kentucky'),
+      ('LA', 'Louisiana'),
+      ('ME', 'Maine'),
+      ('MD', 'Maryland'),
+      ('MA', 'Massachusetts'),
+      ('MI', 'Michigan'),
+      ('MN', 'Minnesota'),
+      ('MS', 'Mississippi'),
+      ('MO', 'Missouri'),
+      ('MT', 'Montana'),
+      ('NE', 'Nebraska'),
+      ('NV', 'Nevada'),
+      ('NH', 'New Hampshire'),
+      ('NJ', 'New Jersey'),
+      ('NM', 'New Mexico'),
+      ('NY', 'New York'),
+      ('NC', 'North Carolina'),
+      ('ND', 'North Dakota'),
+      ('OH', 'Ohio'),
+      ('OK', 'Oklahoma'),
+      ('OR', 'Oregon'),
+      ('PA', 'Pennsylvania'),
+      ('PR', 'Puerto Rico'),
+      ('RI', 'Rhode Island'),
+      ('SC', 'South Carolina'),
+      ('SD', 'South Dakota'),
+      ('TN', 'Tennessee'),
+      ('TX', 'Texas'),
+      ('UT', 'Utah'),
+      ('VT', 'Vermont'),
+      ('VA', 'Virginia'),
+      ('WA', 'Washington'),
+      ('WV', 'West Virginia'),
+      ('WI', 'Wisconsin'),
+      ('WY', 'Wyoming'),
+    )
+    state = forms.ChoiceField(choices=STATES,
+                                max_length=2)
