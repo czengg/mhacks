@@ -43,5 +43,10 @@ $(document).ready( function() {
 		$('div.experienceForm:last').remove();
 		this.destroy();
 	})
+
+	$("#createPageButton").click(function() {
+		form.submit("#lookingForm");
+	})
 })
+
 
