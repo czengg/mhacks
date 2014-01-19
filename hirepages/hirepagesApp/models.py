@@ -9,7 +9,18 @@ class Looker(models.Model):
     FULLTIME = 1
     JOBTYPECHOICES = ((INTERNSHIP, 'Internship'), (FULLTIME, 'FullTime'),)
 
+    HIGH_SCHOOL = 0
+    BACHELORS = 1
+    MASETERS = 2
+    PHD = 3
+    DEGREE_CHOICES = ((HIGH SCHOOL, 'High School'), 
+                      (BACHELORS, 'Bachelors'), 
+                      (MASTERS, 'Masters'),
+                      (PHD, 'Phd'),)
+
     school = models.CharField(max_length=50)
+    degree = models.IntegerField(choices=DEGREE_CHOICES, default=HIGH_SCHOOL)
+    major = models.CharField(max_length=50)
     jobType = models.IntegerField(choices=JOBTYPECHOICES, default=FULLTIME)
     active = models.BooleanField(default=True)
     tags = models.ManyToManyField(Tag)
