@@ -100,7 +100,7 @@ def createLookingPage(request):
             skills = cd['skills']
             looker = Looker(school=school, 
                             jobType=jobType, 
-                            active=active, 
+        v   df                    active=active, 
                             userProfile=user) 
             looker.save()
 
@@ -137,12 +137,23 @@ def update_looking_page(request):
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
+    looker = Looker.objects.filter(userProfile=user)
     
     if request.method == 'POST':
         form = LookerForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-    
+            looker.school = cd['school']
+            looker.major = cd['major']
+            looker.degree = cd['degree']
+            looker.jobType = cd['jobType']
+            looker.active = cd['active']
+            # TODO TAGS 
+            looker.save() 
+    else:
+        # add all the shit to form to send it back 
+        
+        
     return render(request, 'createPageLooking.html', ctx)
 
 
