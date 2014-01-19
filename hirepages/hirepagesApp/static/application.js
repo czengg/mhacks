@@ -45,7 +45,7 @@ $(document).ready( function() {
 	})
 
 	$("#createPageButton").click(function() {
-		form.submit("#lookingForm");
+		$("#lookingForm").submit();
 	})
 })
 
