@@ -284,9 +284,12 @@ def createRecruitingPage(request):
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
-    
+    print "create recruting"
+
     if request.method == 'POST':
-        form = RecruiterForm(request.POST)
+        form = CompanyForm(request.POST)
+
+
         if form.is_valid():
             cd = form.cleaned_data
             school = cd['school']
