@@ -88,7 +88,7 @@ def createLookingPage(request):
     if "user" not in request.session:
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
-    user = User.objects.filter(email=request.session["user"])
+    user = User.objects.get(email=request.session["user"])
     print "create looking" 
  
     if request.method == 'POST':
@@ -98,14 +98,18 @@ def createLookingPage(request):
         
         print "create looking post"        
         if form.is_valid():
+            print "valid form"
             cd = form.cleaned_data
             school = cd['school']
-            jobType = cd['jobType']
-            active = cd['active']
+            jobType = 0
+            #jobType = cd['jobType']
             skills = cd['skills']
+            degree = cd['degree']
+            major = cd['major']
             looker = Looker(school=school, 
                             jobType=jobType, 
-                            active=active, 
+                            degree=degree, 
+                            major=major,
                             userProfile=user) 
             looker.save()
 
@@ -130,6 +134,9 @@ def createLookingPage(request):
                             tag = Tag(tag=rawTag)
                             tag.save()
                             exp.tags.add(tag)
+        else:
+            print "not valid son"
+            print form.errors
         return render(request, 'createPageLooking.html', Context())
  
     else:
@@ -152,7 +159,6 @@ def read_looking_page(request):
     looker = Looker.objects.filter(userProfile=user)
     ctx['school'] = looker.school
     ctx['jobType'] = looker.jobType
-    ctx['active'] = looker.active
 
     tags = [rawtag.tag for rawtag in looker.tags.all()]
     ctx['tags'] = ",".join(tags)
@@ -177,7 +183,7 @@ def updateLookingPage(request):
     if "user" not in request.session:
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
-    user = User.objects.filter(email=request.session["user"])
+    user = User.objects.get(email=request.session["user"])
     print "user"
     print user
     looker = Looker.objects.get(userProfile=user)
@@ -197,7 +203,6 @@ def updateLookingPage(request):
             looker.major = cd['major']
             looker.degree = cd['degree']
             looker.jobType = cd['jobType']
-            looker.active = cd['active']
             looker.tags.clear()
             looker.save()
  
@@ -242,7 +247,6 @@ def updateLookingPage(request):
                                    'major':looker.major,
                                    'degree':looker.degree,
                                    'jobType':looker.jobType,
-                                   'active':looker.active, 
                                    'skills':(",".join(tags)),})    
  
         experiences = Experience.object.filter(lookerId=looker.id).list()
@@ -275,6 +279,7 @@ def delete_looking_page(request):
     looker.delete() 
     return render(request, 'launch_page.html', Context())
 
+<<<<<<< HEAD
 ####################################################
 ########### RECRUITER CRUD #########################
 ####################################################
@@ -301,16 +306,6 @@ def createRecruitingPage(request):
                             active=active, 
                             userProfile=user) 
             looker.save()
+=======
+>>>>>>> dcc1fecd86f3aa381ce17cbf7375103cc6214771
 
-            for skill in skills.split(","):
-                tag = Tag(tag=skill)
-                tag.save()
-                looker.tags.add(tag)
-        return render(request, 'createPageLooking.html', Context())
- 
-    else:
-        form = LookerForm()
-        ExperienceFormSet = formset_factory(ExperienceForm)
-        formset = ExperienceFormSet()
-        return render(request, 'createPageLooking.html', {'form':form, 
-                                                          'formset':formset})

@@ -44,7 +44,7 @@ class Looker(models.Model):
     degree = models.IntegerField(choices=DEGREE_CHOICES, default=HIGH_SCHOOL)
     major = models.CharField(max_length=50)
     jobType = models.IntegerField(choices=JOBTYPECHOICES, default=FULLTIME)
-    active = models.BooleanField(default=True)
+    #active = models.BooleanField(default=True)
     tags = models.ManyToManyField(Tag)
     userProfile = models.OneToOneField(User)
 
