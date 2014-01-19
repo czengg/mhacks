@@ -91,7 +91,9 @@ def search(request):
         print "hi"
     else:
         form = SearchForm()
-        return render(request, 'exploreStart.html', {'form':form})
+        user = User.objects.get(email=request.session["user"])
+        role = user.role
+        return render(request, 'exploreStart.html', {'form':form, 'role':role})
 
 #################################################
 ########### LOOKER CRUD #########################

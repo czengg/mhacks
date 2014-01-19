@@ -37,9 +37,9 @@
 				{{ form.name| attr:"placeholder:Company name"  }}
 			
 			<!-- checkbox to autopopulate company info -->
-			<label><input type="checkbox" name="Check company information">Check for existing company information</label>
-			<a href="#"><input type="url" name="Company website" placeholder="Company Website"></a>
-			<textarea placeholder="Company Description"></textarea>
+			<!-- <label><input type="checkbox" name="Check company information">Check for existing company information</label> -->
+			{{ form.linkToWebsite }}
+			{{ form.description }}
 			</div>
 			
 			<div class="availablePositions">
