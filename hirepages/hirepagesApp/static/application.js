@@ -14,11 +14,7 @@ function displayProfiles(profiles) {
 		var id = "id_form-" + ind + "-";
 		$("#" + id + "position").val(pos.title);
 		$("#" + id + "company").val(pos.company.name);
-		console.log(pos.summary);
 		$("#" + id + "description").val(pos.summary);
-
-		// $("#" + id + "startDate").val(pos.startDate.month + " " + pos.startDate.year);
-		// $("#" + id + "endDate").val(pos.endDate.month + " " + pos.endDate.year);
 
 		$("#experienceAdd").trigger("click");
 		ind ++;
@@ -88,6 +84,10 @@ $(document).ready( function() {
         $(row).find(".experienceDelete").click(function () {
             return deleteForm(this, prefix);
         });
+
+        $($(row).find(".start_date")[0]).datepicker();
+		$($(row).find(".end_date")[0]).datepicker();
+
         // Update the total form count
         $("#id_" + prefix + "-TOTAL_FORMS").val(formCount + 1);
         return false;
@@ -105,8 +105,8 @@ $(document).ready( function() {
 		$("#lookingForm").submit();
 	})
 
-	$(".start_date").datepicker();
-	$(".end_date").datepicker();
+	$("id_form-0-start_date").datepicker();
+	$("id_form-0-end_date").datepicker();
 })
 
 
