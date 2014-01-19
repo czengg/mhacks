@@ -89,12 +89,14 @@ def createLookingPage(request):
         return render(request, 'errorPage.html', {'error': 'Please log in'})
 
     user = User.objects.filter(email=request.session["user"])
-    
+    print "create looking" 
+ 
     if request.method == 'POST':
         form = LookerForm(request.POST)
         ExperienceFormSet = formset_factory(ExperienceForm)
         formset = ExperienceFormSet(request.POST)
         
+        print "create looking post"        
         if form.is_valid():
             cd = form.cleaned_data
             school = cd['school']
@@ -131,6 +133,9 @@ def createLookingPage(request):
         return render(request, 'createPageLooking.html', Context())
  
     else:
+        print "getting something..."
+        if request.method == 'GET':
+            print "create looking get"
         form = LookerForm()
         ExperienceFormSet = formset_factory(ExperienceForm)
         formset = ExperienceFormSet()
@@ -226,12 +231,12 @@ def update_looking_page(request):
                                                       'error':'Problem updating looker'}) 
     else:
         tags = [rawtag.tag for rawtag in looker.tags.all()]
-        form = LookerForm(initial={'school'=looker.school, 
-                                   'major'=looker.major,
-                                   'degree'=looker.degree,
-                                   'jobType'=looker.jobType,
-                                   'active'=looker.active, 
-                                   'skills'=",".join(tags),})    
+        form = LookerForm(initial={'school':looker.school, 
+                                   'major':looker.major,
+                                   'degree':looker.degree,
+                                   'jobType':looker.jobType,
+                                   'active':looker.active, 
+                                   'skills':(",".join(tags)),})    
  
         experiences = Experience.object.filter(lookerId=looker.id).list()
         ExperienceFormSet = formset_factory(ExperienceForm, experiences.count())
