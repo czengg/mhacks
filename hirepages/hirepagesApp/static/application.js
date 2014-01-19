@@ -102,6 +102,7 @@ $(document).ready( function() {
 
 	$("#createPageButton").click(function() {
 		$("#lookingForm").submit();
+        $("#recruitingForm").submit();
 	})
 
 	$("id_form-0-start_date").datepicker();
@@ -111,8 +112,8 @@ $(document).ready( function() {
         var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
         if (formCount > 1) {
             // Delete the item/form
-            $(btn).parents('.experienceFormset').remove();
-            var forms = $('.experienceFormset'); // Get all the forms  
+            $(btn).parents('.positionForm').remove();
+            var forms = $('.positionForm'); // Get all the forms  
             // Update the total number of forms (1 less than before)
             $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
             var i = 0;
@@ -124,7 +125,7 @@ $(document).ready( function() {
             }
         } // End if
         else {
-            alert("You have to enter at least one experience item!");
+            alert("You have to enter at least one position item!");
         }
         return false;
     }
@@ -134,9 +135,9 @@ $(document).ready( function() {
 
         // You can only submit a maximum of 10 todo items 
         // Clone a form (without event handlers) from the first form
-        var row = $(".experienceFormset:first").clone(false).get(0);
+        var row = $(".positionForm:first").clone(false).get(0);
         // Insert it after the last form
-        $(row).removeAttr('id').hide().insertAfter(".experienceFormset:last").slideDown(300);
+        $(row).removeAttr('id').hide().insertAfter(".positionForm:last").slideDown(300);
 
         // Remove the bits we don't want in the new row/form
         // e.g. error messages
@@ -145,10 +146,8 @@ $(document).ready( function() {
 
         window.co = formCount;
 
-        console.log($(row))
-
         // Relabel or rename all the relevant bits
-        $(row).children().each(function() {
+        $(row).children(".positionField").each(function() {
             updateElementIndex(this, prefix, window.co);
             $(this).val("");
         });

@@ -6,7 +6,8 @@
 		<title>Hirepages</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,300,400,700,800,600' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Vollkorn:400,700' rel='stylesheet' type='text/css'>
-		
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
 		{% load staticfiles %}
 		<link href="{% static 'reset.css' %}" type="text/css" rel="stylesheet">
 		<link href="{% static 'styles.css' %}" type="text/css" rel="stylesheet">
@@ -46,14 +47,16 @@
 				{% for f in formset %}
 				<h3 id="positionHeader">Available Position(s): </h3>
 				<div class="availablePositionsSections">
-					<img src="{% static 'img/deleteIcon.png' %}" class="deleteIcon pageIcon positionDelete">
-					{{ f.city| attr:"placeholder:Position city"| add_class:"positionCity" }}
-					{{ f.state| add_class:"positionState" }}
-					{{ f.role }}
+					<div class="positionForm">
+						<img src="{% static 'img/deleteIcon.png' %}" class="deleteIcon pageIcon positionDelete">
+						{{ f.city| attr:"placeholder:Position city"| add_class:"positionCity positionField" }}
+						{{ f.state| add_class:"positionState"| add_class:"positionField" }}
+						{{ f.role| add_class:"positionField" }}
 
-					{{ f.name| attr:"placeholder:Position" }}
-					{{ f.tags| attr:"placeholder:Tags seperate each tag with a space and a comma (ie. 'design, coding')" }}
-					{{ f.description| attr:"placeholder:Position description" }}
+						{{ f.name| attr:"placeholder:Position"| add_class:"positionField" }}
+						{{ f.tags| attr:"placeholder:Tags seperate each tag with a space and a comma (ie. 'design, coding')"| add_class:"positionField" }}
+						{{ f.description| attr:"placeholder:Position description"| add_class:"positionField" }}
+					</div>
 				</div>
 				{% endfor %}
 				<img src="{% static 'img/addIcon.png' %}" class="addIcon pageIcon" id="positionAdd">
