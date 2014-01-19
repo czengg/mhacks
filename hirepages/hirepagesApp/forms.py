@@ -69,9 +69,8 @@ class LookerForm(forms.Form):
 
     degree = forms.ChoiceField(choices=DEGREE_CHOICES)
     major = forms.CharField(max_length=50)
-    jobType = forms.ChoiceField(widget=forms.RadioSelect,
-                                            choices=JOBTYPECHOICES)
-    active = forms.BooleanField()
+    #jobType = forms.ChoiceField(widget=forms.RadioSelect,
+    #                                       choices=JOBTYPECHOICES)
     skills = forms.CharField(max_length=100,
                                 widget=forms.Textarea)
 
