@@ -63,10 +63,12 @@ class Recruiter(models.Model):
     userProfile = models.OneToOneField('User')
 
 class Company(models.Model):
+    name = models.TextField(max_length=50)
     description = models.TextField(max_length=200)
     linkToWebsite = models.URLField()
 
 class Position(models.Model):
+    name = models.TextField(max_length=50)
     description = models.TextField(max_length=200)
     recruiter = models.ForeignKey('Recruiter')
     city = models.CharField(max_length=50)
